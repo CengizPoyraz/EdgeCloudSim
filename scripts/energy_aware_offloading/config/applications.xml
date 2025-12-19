@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<applications>
+    
+    <!-- Application 0: COMPUTATION INTENSIVE -->
+    <application name="COMPUTATION_INTENSIVE">
+        <!-- Usage percentage of this application among all users -->
+        <usage_percentage>40</usage_percentage>
+        
+        <!-- Task computational requirements (in MIPS) -->
+        <task_length>10000</task_length>
+        
+        <!-- Input data size (in MB) -->
+        <input_file_size>0.5</input_file_size>
+        
+        <!-- Output data size (in MB) -->
+        <output_file_size>0.2</output_file_size>
+        
+        <!-- Delay sensitivity / deadline (in seconds) -->
+        <delay_sensitivity>2.0</delay_sensitivity>
+        
+        <!-- Active and idle periods (in seconds) for task generation pattern -->
+        <active_period>40</active_period>
+        <idle_period>60</idle_period>
+        
+        <!-- Data upload and download amounts during active period (in MB) -->
+        <data_upload>5</data_upload>
+        <data_download>5</data_download>
+        
+        <!-- Task generation rate (tasks per second during active period) -->
+        <task_generation_rate>0.2</task_generation_rate>
+        
+        <!-- Probability of selecting cloud over edge (0.0 to 1.0) -->
+        <!-- 0.0 = always edge, 1.0 = always cloud -->
+        <prob_cloud_selection>0.0</prob_cloud_selection>
+        
+        <!-- Poisson interarrival time (mean time between tasks in seconds) -->
+        <poisson_interarrival>5</poisson_interarrival>
+        
+        <!-- Expected VM utilization on edge (0.0 to 1.0) -->
+        <vm_utilization_on_edge>0.5</vm_utilization_on_edge>
+        
+        <!-- Expected VM utilization on cloud (0.0 to 1.0) -->
+        <vm_utilization_on_cloud>0.5</vm_utilization_on_cloud>
+        
+        <!-- Expected VM utilization on mobile (0.0 to 1.0) -->
+        <vm_utilization_on_mobile>0.7</vm_utilization_on_mobile>
+        
+        <!-- Required CPU cores for this application -->
+        <required_core>1</required_core>
+        
+        <!-- RAM requirement (in MB) -->
+        <ram>512</ram>
+        
+        <!-- Storage requirement (in MB) -->
+        <storage>1000</storage>
+        
+        <!-- Bandwidth requirement (in Mbps) -->
+        <bandwidth>10</bandwidth>
+    </application>
+    
+    <!-- Application 1: NETWORK INTENSIVE -->
+    <application name="NETWORK_INTENSIVE">
+        <usage_percentage>30</usage_percentage>
+        
+        <task_length>2000</task_length>
+        <input_file_size>5.0</input_file_size>
+        <output_file_size>3.0</output_file_size>
+        
+        <delay_sensitivity>5.0</delay_sensitivity>
+        
+        <active_period>50</active_period>
+        <idle_period>50</idle_period>
+        
+        <data_upload>10</data_upload>
+        <data_download>10</data_download>
+        
+        <task_generation_rate>0.15</task_generation_rate>
+        
+        <prob_cloud_selection>0.0</prob_cloud_selection>
+        
+        <poisson_interarrival>7</poisson_interarrival>
+        
+        <vm_utilization_on_edge>0.3</vm_utilization_on_edge>
+        
+        <vm_utilization_on_cloud>0.3</vm_utilization_on_cloud>
+        
+        <vm_utilization_on_mobile>0.5</vm_utilization_on_mobile>
+        
+        <required_core>1</required_core>
+        
+        <ram>256</ram>
+        
+        <storage>500</storage>
+        
+        <bandwidth>20</bandwidth>
+    </application>
+    
+    <!-- Application 2: BALANCED -->
+    <application name="BALANCED">
+        <usage_percentage>30</usage_percentage>
+        
+        <task_length>5000</task_length>
+        <input_file_size>1.5</input_file_size>
+        <output_file_size>1.0</output_file_size>
+        
+        <delay_sensitivity>3.0</delay_sensitivity>
+        
+        <active_period>45</active_period>
+        <idle_period>55</idle_period>
+        
+        <data_upload>7</data_upload>
+        <data_download>7</data_download>
+        
+        <task_generation_rate>0.18</task_generation_rate>
+        
+        <prob_cloud_selection>0.0</prob_cloud_selection>
+        
+        <poisson_interarrival>6</poisson_interarrival>
+        
+        <vm_utilization_on_edge>0.4</vm_utilization_on_edge>
+        
+        <vm_utilization_on_cloud>0.4</vm_utilization_on_cloud>
+        
+        <vm_utilization_on_mobile>0.6</vm_utilization_on_mobile>
+        
+        <required_core>1</required_core>
+        
+        <ram>384</ram>
+        
+        <storage>750</storage>
+        
+        <bandwidth>15</bandwidth>
+    </application>
+    
+</applications>
