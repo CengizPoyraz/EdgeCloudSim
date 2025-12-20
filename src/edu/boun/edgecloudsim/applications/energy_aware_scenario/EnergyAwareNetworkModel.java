@@ -13,10 +13,10 @@ public class EnergyAwareNetworkModel extends NetworkModel {
     
     private double wlanPoissonMean;
     private double wanPoissonMean;
-    private double gsmPoissonMean;
     
     private double avgTaskInputSize;
     private double avgTaskOutputSize;
+    private int numberOfEdgeHosts;
     
     public EnergyAwareNetworkModel(int _numberOfMobileDevices, String _simScenario) {
         super(_numberOfMobileDevices, _simScenario);
@@ -26,7 +26,8 @@ public class EnergyAwareNetworkModel extends NetworkModel {
     public void initialize() {
         wlanPoissonMean = 0.5 / ((double)numberOfMobileDevices / 20.0);
         wanPoissonMean = 0.5 / ((double)numberOfMobileDevices / 20.0);
-        gsmPoissonMean = 0.5 / ((double)numberOfMobileDevices / 20.0);
+        
+        numberOfEdgeHosts = SimSettings.getInstance().getNumOfEdgeHosts();
         
         avgTaskInputSize = 0;
         avgTaskOutputSize = 0;
@@ -39,6 +40,11 @@ public class EnergyAwareNetworkModel extends NetworkModel {
         avgTaskInputSize = avgTaskInputSize / taskLookUp.length;
         avgTaskOutputSize = avgTaskOutputSize / taskLookUp.length;
     }
+    
+    private boolean isEdgeDevice(int deviceId) {
+        return deviceId == SimSettings.GENERIC_EDGE_DEVICE_ID || 
+               (deviceId >= 0 && deviceId < numberOfEdgeHosts);
+    }
 
     @Override
     public double getUploadDelay(int sourceDeviceId, int destDeviceId, Task task) {
@@ -47,11 +53,14 @@ public class EnergyAwareNetworkModel extends NetworkModel {
         if(destDeviceId == SimSettings.CLOUD_DATACENTER_ID) {
             delay = getWanUploadDelay(sourceDeviceId, task);
         }
-        else if(destDeviceId == SimSettings.GENERIC_EDGE_DEVICE_ID) {
+        else if(isEdgeDevice(destDeviceId)) {
             delay = getWlanUploadDelay(sourceDeviceId, task);
         }
         else if(destDeviceId == SimSettings.MOBILE_DATACENTER_ID) {
-            delay = 0;
+            delay = 0.001;
+        }
+        else {
+            delay = getWlanUploadDelay(sourceDeviceId, task);
         }
         
         return delay;
@@ -64,11 +73,14 @@ public class EnergyAwareNetworkModel extends NetworkModel {
         if(sourceDeviceId == SimSettings.CLOUD_DATACENTER_ID) {
             delay = getWanDownloadDelay(destDeviceId, task);
         }
-        else if(sourceDeviceId == SimSettings.GENERIC_EDGE_DEVICE_ID) {
+        else if(isEdgeDevice(sourceDeviceId)) {
             delay = getWlanDownloadDelay(destDeviceId, task);
         }
         else if(sourceDeviceId == SimSettings.MOBILE_DATACENTER_ID) {
-            delay = 0;
+            delay = 0.001;
+        }
+        else {
+            delay = getWlanDownloadDelay(destDeviceId, task);
         }
         
         return delay;
@@ -77,21 +89,29 @@ public class EnergyAwareNetworkModel extends NetworkModel {
     private double getWlanUploadDelay(int deviceId, Task task) {
         double dataSize = task.getCloudletFileSize();
         double wlanBw = SimSettings.getInstance().getWlanBandwidth();
-        double delay = (dataSize * 8) / wlanBw;
         
+        if(wlanBw == 0) {
+            return -1;
+        }
+        
+        double delay = (dataSize * 8) / wlanBw;
         delay += exponentialRandom(wlanPoissonMean);
         
-        return delay;
+        return Math.max(delay, 0.001);
     }
 
     private double getWlanDownloadDelay(int deviceId, Task task) {
         double dataSize = task.getCloudletOutputSize();
         double wlanBw = SimSettings.getInstance().getWlanBandwidth();
-        double delay = (dataSize * 8) / wlanBw;
         
+        if(wlanBw == 0) {
+            return -1;
+        }
+        
+        double delay = (dataSize * 8) / wlanBw;
         delay += exponentialRandom(wlanPoissonMean);
         
-        return delay;
+        return Math.max(delay, 0.001);
     }
 
     private double getWanUploadDelay(int deviceId, Task task) {
@@ -99,14 +119,14 @@ public class EnergyAwareNetworkModel extends NetworkModel {
         double wanBw = SimSettings.getInstance().getWanBandwidth();
         
         if(wanBw == 0) {
-            return Double.MAX_VALUE;
+            return -1;
         }
         
         double delay = (dataSize * 8) / wanBw;
         delay += SimSettings.getInstance().getWanPropagationDelay();
         delay += exponentialRandom(wanPoissonMean);
         
-        return delay;
+        return Math.max(delay, 0.001);
     }
 
     private double getWanDownloadDelay(int deviceId, Task task) {
@@ -114,14 +134,14 @@ public class EnergyAwareNetworkModel extends NetworkModel {
         double wanBw = SimSettings.getInstance().getWanBandwidth();
         
         if(wanBw == 0) {
-            return Double.MAX_VALUE;
+            return -1;
         }
         
         double delay = (dataSize * 8) / wanBw;
         delay += SimSettings.getInstance().getWanPropagationDelay();
         delay += exponentialRandom(wanPoissonMean);
         
-        return delay;
+        return Math.max(delay, 0.001);
     }
 
     private double exponentialRandom(double mean) {

@@ -9,7 +9,7 @@
             <x_pos>100</x_pos>
             <y_pos>100</y_pos>
             <wlan_id>0</wlan_id>
-            <attractiveness>1</attractiveness>
+            <attractiveness>0</attractiveness>
         </location>
         <hosts>
             <host>
@@ -43,7 +43,7 @@
             <x_pos>200</x_pos>
             <y_pos>100</y_pos>
             <wlan_id>1</wlan_id>
-            <attractiveness>2</attractiveness>
+            <attractiveness>1</attractiveness>
         </location>
         <hosts>
             <host>
@@ -77,7 +77,7 @@
             <x_pos>300</x_pos>
             <y_pos>100</y_pos>
             <wlan_id>2</wlan_id>
-            <attractiveness>3</attractiveness>
+            <attractiveness>2</attractiveness>
         </location>
         <hosts>
             <host>
@@ -111,7 +111,7 @@
             <x_pos>150</x_pos>
             <y_pos>200</y_pos>
             <wlan_id>3</wlan_id>
-            <attractiveness>2</attractiveness>
+            <attractiveness>1</attractiveness>
         </location>
         <hosts>
             <host>
@@ -145,7 +145,7 @@
             <x_pos>250</x_pos>
             <y_pos>200</y_pos>
             <wlan_id>4</wlan_id>
-            <attractiveness>1</attractiveness>
+            <attractiveness>0</attractiveness>
         </location>
         <hosts>
             <host>

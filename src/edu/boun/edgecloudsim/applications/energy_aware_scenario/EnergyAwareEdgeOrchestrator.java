@@ -20,6 +20,7 @@ import edu.boun.edgecloudsim.utils.SimLogger;
 public class EnergyAwareEdgeOrchestrator extends EdgeOrchestrator {
     
     private int numberOfHost;
+    private static boolean warnedLocalNotSupported = false;
     
     private static final double MOBILE_POWER_IDLE = 0.5;
     private static final double MOBILE_POWER_ACTIVE = 2.5;
@@ -66,8 +67,25 @@ public class EnergyAwareEdgeOrchestrator extends EdgeOrchestrator {
             SimLogger.printLine("Unknown policy: " + policy);
             System.exit(0);
         }
-        
-        return result;
+
+        return redirectIfLocalNotSupported(result);
+    }
+
+    /**
+     * Energy-aware scenario uses DefaultMobileServerManager which disables local
+     * computation. Redirect MOBILE_DATACENTER_ID decisions to edge and warn once
+     * so the simulation keeps running instead of terminating.
+     */
+    private int redirectIfLocalNotSupported(int targetDeviceId) {
+        if(targetDeviceId == SimSettings.MOBILE_DATACENTER_ID) {
+            if(!warnedLocalNotSupported) {
+                SimLogger.printLine("Local execution not supported in energy-aware scenario; redirecting tasks to edge.");
+                warnedLocalNotSupported = true;
+            }
+            return SimSettings.GENERIC_EDGE_DEVICE_ID;
+        }
+
+        return targetDeviceId;
     }
     
     private int getRandomDecision(Task task) {
