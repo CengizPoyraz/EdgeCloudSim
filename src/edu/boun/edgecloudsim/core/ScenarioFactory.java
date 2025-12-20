@@ -85,8 +85,4 @@ public interface ScenarioFactory {
 	 * @throws Exception if mobile device manager creation fails
 	 */
 	public MobileDeviceManager getMobileDeviceManager() throws Exception;
-
-	public int getNumOfMobileDevice();
-    
-    public void setNumOfMobileDevice(int numOfMobileDevice);
 }

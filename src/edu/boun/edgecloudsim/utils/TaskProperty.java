@@ -93,7 +93,6 @@ public class TaskProperty {
 		outputFileSize = _outputFileSize;
 	}
 
-
 	/**
 	 * Constructs a TaskProperty using statistical distributions for realistic characteristics.
 	 * 
@@ -130,13 +129,6 @@ public class TaskProperty {
 		pesNumber = (int)SimSettings.getInstance().getTaskLookUpTable()[_taskType][8];
 	}
 
-	
-	public TaskProperty(int _mobileDeviceId, int _taskType, double _startTime, int _pesNumber, int j) {
-		mobileDeviceId = _mobileDeviceId;
-		startTime = _startTime;
-		taskType = _taskType;
-		pesNumber = _pesNumber;
-	}
 	/**
 	 * Constructs a TaskProperty for single task type scenarios with statistical distributions.
 	 * 
@@ -170,8 +162,6 @@ public class TaskProperty {
 		// Retrieve processing element requirement for task type 0
 		pesNumber = (int)SimSettings.getInstance().getTaskLookUpTable()[0][8];
 	}
-
-
 
 	/**
 	 * Returns the simulation time when this task should be submitted.

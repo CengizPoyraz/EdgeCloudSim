@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<applications>
+    <!-- Delay-Sensitive Real-time Application (e.g., AR/VR) -->
+    <application name="REALTIME_AR">
+        <usage_percentage>30</usage_percentage>
+        <prob_cloud_selection>10</prob_cloud_selection>
+        <delay_sensitivity>0.9</delay_sensitivity>
+        <max_delay_requirement>0.1</max_delay_requirement>
+        <poisson_interarrival>2</poisson_interarrival>
+        <active_period>3600</active_period>
+        <idle_period>1</idle_period>
+        <data_upload>50</data_upload>
+        <data_download>100</data_download>
+        <task_length>500</task_length>
+        <required_core>1</required_core>
+        <vm_utilization_on_edge>3</vm_utilization_on_edge>
+        <vm_utilization_on_cloud>1</vm_utilization_on_cloud>
+        <vm_utilization_on_mobile>5</vm_utilization_on_mobile>
+    </application>
+    
+    <!-- Medium-Delay Interactive Application (e.g., Gaming) -->
+    <application name="INTERACTIVE_GAMING">
+        <usage_percentage>25</usage_percentage>
+        <prob_cloud_selection>20</prob_cloud_selection>
+        <delay_sensitivity>0.7</delay_sensitivity>
+        <max_delay_requirement>0.3</max_delay_requirement>
+        <poisson_interarrival>3</poisson_interarrival>
+        <active_period>3600</active_period>
+        <idle_period>1</idle_period>
+        <data_upload>30</data_upload>
+        <data_download>80</data_download>
+        <task_length>800</task_length>
+        <required_core>1</required_core>
+        <vm_utilization_on_edge>2.5</vm_utilization_on_edge>
+        <vm_utilization_on_cloud>0.8</vm_utilization_on_cloud>
+        <vm_utilization_on_mobile>4</vm_utilization_on_mobile>
+    </application>
+    
+    <!-- Delay-Tolerant Computation-Intensive Application (e.g., Image Processing) -->
+    <application name="IMAGE_PROCESSING">
+        <usage_percentage>25</usage_percentage>
+        <prob_cloud_selection>40</prob_cloud_selection>
+        <delay_sensitivity>0.4</delay_sensitivity>
+        <max_delay_requirement>1.0</max_delay_requirement>
+        <poisson_interarrival>5</poisson_interarrival>
+        <active_period>3600</active_period>
+        <idle_period>1</idle_period>
+        <data_upload>200</data_upload>
+        <data_download>50</data_download>
+        <task_length>2000</task_length>
+        <required_core>1</required_core>
+        <vm_utilization_on_edge>4</vm_utilization_on_edge>
+        <vm_utilization_on_cloud>1.5</vm_utilization_on_cloud>
+        <vm_utilization_on_mobile>8</vm_utilization_on_mobile>
+    </application>
+    
+    <!-- Background Data Sync Application -->
+    <application name="DATA_SYNC">
+        <usage_percentage>20</usage_percentage>
+        <prob_cloud_selection>60</prob_cloud_selection>
+        <delay_sensitivity>0.2</delay_sensitivity>
+        <max_delay_requirement>3.0</max_delay_requirement>
+        <poisson_interarrival>10</poisson_interarrival>
+        <active_period>3600</active_period>
+        <idle_period>1</idle_period>
+        <data_upload>500</data_upload>
+        <data_download>100</data_download>
+        <task_length>500</task_length>
+        <required_core>1</required_core>
+        <vm_utilization_on_edge>1.5</vm_utilization_on_edge>
+        <vm_utilization_on_cloud>0.5</vm_utilization_on_cloud>
+        <vm_utilization_on_mobile>2</vm_utilization_on_mobile>
+    </application>
+</applications>
